@@ -62,9 +62,6 @@ Data Structures & Algorithms
 - Data structure: array of Task objects (simple, flat list).
 - Traversal algorithm: Depth-First Search over the dependency array.
 
-Complexity:
-Graph traversal is O(N + E) conceptually, but current implementation calls .find(...) inside loops which makes it closer to O(N * E) for dense graphs — fine for small datasets, but inefficient for large graphs.
-
 ========================
 Assumptions & Trade-Offs
 ========================
