@@ -12,13 +12,15 @@ A **To-do List App frontend** built using **React + Vite** that interfaces with 
 - **Docker & Docker Compose** (for running the backend)
 
 ### Run backend (Docker)
-1. cd into the backend folder
-2. Ensure a .env exists (there is an example .env in the repo)
-3. Start services: (command) docker compose up -d
-4. API will be available at http://localhost:8000
+1. Open new commmand prompt and run `cd backend`
+2. Ensure a `.env` exists (there is an example `.env` in the repo)
+3. Start services:
+  - Run `docker compose up -d`
+  - Run `docker compose exec -it api uv run alembic upgrade head`
+5. API will be available at http://localhost:8000
 
 ### Run frontend (dev)
-1. Open commmand prompt and run `cd frontend-vite`
+1. Open new commmand prompt and run `cd frontend-vite`
 2. Install dependencies: `npm install`
 3. Start dev server: `npm run dev`
 4. Open the URL shown by Vite (usually http://localhost:5173)
@@ -33,6 +35,7 @@ A **To-do List App frontend** built using **React + Vite** that interfaces with 
 - Delete task `DELETE /tasks/:id`
 - Set task state `POST /tasks/:id/state/:state`
 - Add task dependency `POST /dependencies/:task_id/blockers/:blocker_id`
+
 
 ## Task Dependency & Propagation Approach
 
@@ -55,10 +58,12 @@ A **To-do List App frontend** built using **React + Vite** that interfaces with 
   - Uses a visited `Set()` to avoid re-processing nodes in the traversal
 - This keeps downstream tasks blocked automatically when upstream tasks are unfinished.
 
+
 ## Data Structures & Algorithms
 
 - Data structure: array of Task objects (simple, flat list).
 - Traversal algorithm: Depth-First Search over the dependency array.
+
 
 ## Assumptions & Trade-Offs
 
@@ -66,6 +71,7 @@ A **To-do List App frontend** built using **React + Vite** that interfaces with 
 - **Simplicity over optimality**: readable, easy-to-follow code chosen over micro-optimized structures.
 - **No explicit cycle handling**: assumes input graph is acyclic (no circular dependencies). Cycles may cause repeated state toggles or improper propagation.
 - **UI optimistic updates**: current code updates UI only after successful API responses (safer but slower UX), except for local propagation logic which is applied after state-change responses.
+
 
 ## Potential improvements
 
